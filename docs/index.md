@@ -3,15 +3,22 @@
 
 #### Here you can view various samples of code that I have produced.
 
+## **Gallery**
+
+![Image](Figure6bhtmlUpload.png)
 
 ## **R**
 
 Project | Sample Images
---------- | ----------
-#### **[EICA 2.0: A general theory of enemy release in plant invasions - Supplementary material](richiehonor.github.io/EICA2_SuppMat.html)** | ![Image](Figure6bhtmlUpload.png)
+--- | ---
+
+* **[EICA 2.0: A general theory of enemy release in plant invasions - Supplementary material](richiehonor.github.io/EICA2_SuppMat.html) *(book chapter)*** | test
 *Description*
 Here is shown how I generated the figures used in my recently published (2020) chapter in the book ["Plant invasions: the role of biotic interactions"](https://www.cabi.org/cabebooks/ebook/20203555905). There also contains a few figures that were not used in the final manuscript, but were part of the process. 
 
 
 
+ * **[Data integration for "Plasticity and evolutionary potential of *Alliaria petiolata* life history and leaf chemistry traits in different competitive environments"](richiehonor.github.io/AllData_Synthesis.html) *(MSc Thesis)***
+*Description*
+Here is the code used to integrate XX different data frames into one data frame from which data analysis and visualization were performed (see below). This data was used in the publishing of my [master's thesis](https://qspace.library.queensu.ca/handle/1974/28610). 
 
