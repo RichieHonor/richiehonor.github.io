@@ -3,7 +3,7 @@
 
 #### Here you can view the figures I have created, my data analyses and other examples of code that contributed to various projects. The links to my published works are also included as links when available. 
 
-## **Gallery**
+## **[Gallery](richiehonor.github.io/Gallery.md)**
 
 ![Image](Figure6bhtmlUpload.png)
 
