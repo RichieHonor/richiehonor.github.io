@@ -1,5 +1,12 @@
+---
+title: "Cannabis and Pregnancy Functions"
+output: html_document
+---
+
 
 #### Theme for plotting
+
+```{r}
 
 theme_simple<-function(){
   #base theme
@@ -43,9 +50,10 @@ theme_simple<-function(){
     )
 }
 
+```
 
 #### Function to obtain the distribution (percent, and 95% CI) of a dependent variable across levels of education and partner cannabis consumption
-
+```{r}
 ConfIntProportion2<-function(x,Education,Partner){
   x<-as.character(x)
   x<-x[!is.na(x)]
@@ -181,9 +189,10 @@ ConfIntProportion3<-function(Outcome,Correlate, as_word_table=T){
  }
 
 
+```
 
-#### A simpler version of the two previous functions, this computes the percent and confidence interval around a variable, but not across an independent variable.
-
+#### Function to compute the percent and confidence interval around a variable, but not across an independent variable.
+```{r}
 ConfIntProportion<-function(x){
   x<-x[!is.na(x)]
   out<-data.frame("percent", "lower","upper","numerator","denominator")
@@ -211,27 +220,35 @@ ConfIntProportion<-function(x){
   return(out)
 }
 
+```
 
 #### Function to translate data from model scale to probability scale.
+```{r}
 Link=function(x){
   a=exp(x)/(1+exp(x))
   return(a)
 }
+```
 
-#### Function to translate data from model scale to odds ratia
+#### Function to translate data from model scale to odds ratio
+```{r}
 Odds=function(x){
   a=exp(x)
   return(a)
 }
+```
 
 #### Function to calculate a 95% confidence interval from the model scale (from log odds)
+```{r}
 CI95LogToOdd=function(mean,SE){
   lo=Odds(mean-1.96*SE)
   up=Odds(mean+1.96*SE)
   return(c(lo,up))
 }
+```
 
 #### Function to count the number of "checked" boxes in columns. 
+```{r}
 Check_Counter<-function(x){
   count=0
   for(i in 1:length(x)){
@@ -242,8 +259,11 @@ Check_Counter<-function(x){
   }
   return(c(count,count/length(x)))
 }
+```
 
-#### Frequency calculator, Dependent variable must be 1 and 0. This calculates the percentage of people that belong to a category and smoke.var2 is there for the option of parsing the amount of people that smoke within each level of the two categorical variables. 
+#### Frequency calculator
+Dependent variable must be 1 and 0. This calculates the percentage of people that belong to a category and smoke.var2 is there for the option of parsing the amount of people that smoke within each level of the two categorical variables.
+```{r}
 Freq_Smoke<-function(var1,var2=NULL,smoke){
   
   #If we are looking at the frequency of smokers across one variable.
@@ -301,13 +321,17 @@ Freq_Smoke<-function(var1,var2=NULL,smoke){
     
   }#end else statement
 }#end function
-
+```
 
 #### Function to calculate the percentage of people giving birth in each statcan age cohort for OUR data.
+```{r}
 agePercent=function(min,max,sample){
   numberin=length(sample[sample>=min & sample<=max])
   numberout=length(sample)
   percent=(numberin/numberout)*100
   return(percent)
 }
+
+```
+
 
