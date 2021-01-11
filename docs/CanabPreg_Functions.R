@@ -1,0 +1,313 @@
+
+#### Theme for plotting
+
+theme_simple<-function(){
+  #base theme
+  theme_classic() %+replace%
+    #theme additions
+    #all font size must be the same and the font they want is arial. Bold is ok.
+    theme(
+      
+      #Remove legend
+      #legend.position="none",
+      
+      #Theme of axis text and ticks
+      axis.text.y = element_text(color = "black", size = 12,vjust= 0.5,family = 'Arial'),
+      
+      axis.text.x = element_text(color = "black", size = 12,family = 'Arial',margin = margin(5,0,0,0)),
+      
+      axis.ticks.x = element_blank(),
+      
+      #Theme of Axis titles
+      axis.title.x =  element_text(color = "black", size = 14,margin=margin(25,0,0,0),family = 'Arial',face='bold'),
+      axis.title.y =  element_text(color = "black", size = 14, angle=90,vjust= 0.5,margin=margin(0,25,0,0),family = 'Arial',face="bold"),
+      text = element_text(size = 14),
+      #axis.title.y = element_blank(),
+      #Make element blank and use letters to denote. 
+      # title = element_text(color = "black", size = 12, face = "bold",margin=margin(0,0,10,0),family = 'Arial'),
+      
+      #Plot Margin
+      plot.margin = unit(c(1,1,1,0), "cm"),
+      
+      #Theme of Axis lines
+      axis.line=element_line(colour = "black", size = 1),
+      
+      legend.text = element_text(color = "black", size = 12,family = 'Arial',face = 'bold'),
+      legend.title = element_blank(),
+      #legend.title = element_text(color="black",size=12,face="bold",family = 'Arial'),
+      legend.position = "none",
+      legend.spacing.y = unit(0, "pt"),
+      
+      
+      plot.title=element_text(color = "black", size = 14,family = 'Arial',face = 'bold',vjust=6)
+    )
+}
+
+
+#### Function to obtain the distribution (percent, and 95% CI) of a dependent variable across levels of education and partner cannabis consumption
+
+ConfIntProportion2<-function(x,Education,Partner){
+  x<-as.character(x)
+  x<-x[!is.na(x)]
+  Categories<-unique(x)
+  out<-data.frame("Education","Partner","varname","percent", "lower","upper","numerator","denominator")
+  colnames(out)<-c("Education","Partner","varname","percent", "lower","upper","numerator","denominator")
+  
+  for(i in 1:length(Categories)){
+    
+    Numerator<-length(x[x==Categories[i]]) #numerator
+    n<-length(x) #denominator
+    
+    p<-Numerator/n #Proportion. 
+    
+    z<-qt(0.975, n)
+    CI<-z*sqrt(   (   p*(1-p)   )/n     )
+    
+    CI<-CI*100
+    p<-p*100
+    
+    out[i,1]<-Education
+    out[i,2]<-Partner
+    out[i,3]<-Categories[i]
+    out[i,4]<-p
+    out[i,5]<-p-CI
+    out[i,6]<-p+CI
+    out[i,7]<-Numerator
+    out[i,8]<-n
+  }
+  
+  return(out)
+}
+
+
+
+#### Function to obtain the distribution (percent, and 95% CI) of a dependent variable across the levels of any given dependent variable
+
+ConfIntProportion3<-function(Outcome,Correlate, as_word_table=T){
+  
+  
+  #--------------
+  #Creating input data frame to subset out NA's
+  
+  Data<-data.frame(Outcome,Correlate) #Construct a data frame within function
+  
+  colnames(Data)<-c("SmokeOutcome","CorrelateCategory") #Assigning names to the data frame 
+  
+ Data<-Data[!is.na(Data$CorrelateCategory),] #Remove NA's from data frame i made
+ 
+
+ 
+ #Creaing a vector of unique categories (minus NA's)
+   Categories<-unique(Data$CorrelateCategory) #Creating unique categories vector
+#   
+   
+   
+   
+   #Creating output data frames
+#----------------
+
+   OutcomeName<-deparse(substitute(Outcome))#Obtaining names for the outcome and the correlate
+   CorrelateName<-deparse(substitute(Correlate))
+   
+
+   
+   
+   
+   #Creating output data frame for verbose output
+    out<-data.frame(OutcomeName,CorrelateName,"percent","numerator","denominator","lower","upper")
+    colnames(out)<-c(OutcomeName,CorrelateName,"percent","numerator","denominator","lower","upper")
+   
+    
+    #data frame for word output
+    out2<-data.frame(CorrelateName,"No","Yes")
+    colnames(out2)<-c("Variable","No","Yes")
+    
+    
+    
+    row<-0#Preping the row number for building the data frame
+  
+   for(i in 1:length(Categories)){
+     
+     #seting the input data frame to create a data frame containing only the  category of focus.
+     DataSubset<-Data[Data$CorrelateCategory==Categories[i],] 
+     
+     for(j in 0:1){ #This loop is to obtain both the positive and negative response outcomes
+       
+       row<-row+1  #Row counter to keep track of the rows
+      
+     Numerator<-length(DataSubset$SmokeOutcome[DataSubset$SmokeOutcome==j]) #numerator of individuals with outcome
+  
+     #n<-length(DataSubset$SmokeOutcome) #Denominator if want the category total to be denom
+     n<-length(Data$SmokeOutcome[Data$SmokeOutcome==j]) #demoninator if want the outcome total to be the denom
+#     
+     p<-Numerator/n #Proportion. 
+#     
+     
+     z<-qt(0.975, n) #95% confidence intervale calculation
+     CI<-z*sqrt(   (   p*(1-p)   )/n     )
+     CI<-CI*100
+     p<-p*100
+#     
+     out[row,1]<-j
+     out[row,2]<-Categories[i]
+     out[row,3]<-p
+     out[row,4]<-Numerator
+     out[row,5]<-n
+     out[row,6]<-p-CI
+     out[row,7]<-p+CI
+     
+     #Making vectors for a publishable data frame (to be printed as a word table)
+     
+     col<-j+2 #index for the column. ... #the row is simply 1
+     
+     Numerator_Percent<-paste(Numerator," ","(",round(p,1),")",sep="")
+     
+     out2[1,1]<-CorrelateName #The first column and row is the name of the Variable 
+     out2[1,2]<-"" #The Other two columns in the first row are just blank
+     out2[1,3]<-"" 
+     
+     out2[i+1,1]<-Categories[i] #The first column is the category of focus. 
+     out2[i+1,col]<-Numerator_Percent #The second column is the number of participants (either no or yes) 
+
+    
+     }
+   }
+#   
+    if(as_word_table==F){
+      return(out)
+    }
+   
+    else {return(out2)}
+ }
+
+
+
+#### A simpler version of the two previous functions, this computes the percent and confidence interval around a variable, but not across an independent variable.
+
+ConfIntProportion<-function(x){
+  x<-x[!is.na(x)]
+  out<-data.frame("percent", "lower","upper","numerator","denominator")
+  colnames(out)<-c("percent", "lower","upper","numerator","denominator")
+  
+    
+    Numerator<-sum(x) #numerator
+    n<-length(x) #denominator
+    
+    p<-Numerator/n #Proportion. 
+    
+    z<-qt(0.975, n)
+    CI<-z*sqrt(   (   p*(1-p)   )/n     )
+    
+    CI<-CI*100
+    p<-p*100
+    
+
+    out[1,1]<-p
+    out[1,2]<-p-CI
+    out[1,3]<-p+CI
+    out[1,4]<-Numerator
+    out[1,5]<-n
+  
+  return(out)
+}
+
+
+#### Function to translate data from model scale to probability scale.
+Link=function(x){
+  a=exp(x)/(1+exp(x))
+  return(a)
+}
+
+#### Function to translate data from model scale to odds ratia
+Odds=function(x){
+  a=exp(x)
+  return(a)
+}
+
+#### Function to calculate a 95% confidence interval from the model scale (from log odds)
+CI95LogToOdd=function(mean,SE){
+  lo=Odds(mean-1.96*SE)
+  up=Odds(mean+1.96*SE)
+  return(c(lo,up))
+}
+
+#### Function to count the number of "checked" boxes in columns. 
+Check_Counter<-function(x){
+  count=0
+  for(i in 1:length(x)){
+    if(x[i]=="Checked"){
+      count=count+1
+    }
+    else{next}
+  }
+  return(c(count,count/length(x)))
+}
+
+#### Frequency calculator, Dependent variable must be 1 and 0. This calculates the percentage of people that belong to a category and smoke.var2 is there for the option of parsing the amount of people that smoke within each level of the two categorical variables. 
+Freq_Smoke<-function(var1,var2=NULL,smoke){
+  
+  #If we are looking at the frequency of smokers across one variable.
+  
+  if(is.null(var2)){
+    a<-data.frame(table(var1,smoke)) #This dataframe already has a collumn called "Freq"
+    Levels=levels(a$var1)
+    Percent<-c()
+    Names<-c()
+    Names_2<-c()
+    Fraction<-c()
+    
+    for(i in 1:length(Levels)){
+      Numerator<-a$Freq[a$var1==Levels[i] & a$smoke==1]
+      Denominator<-a$Freq[a$var1==Levels[i] & a$smoke==0]
+      #calculate a percent, not the odds ratio. 
+      Denominator<-Numerator+Denominator
+      Percent[i]<-(Numerator/Denominator)*100
+      Names[i]<-Levels[i]
+      Fraction[i]<-paste(Numerator,Denominator,sep="/")
+    }
+    
+    return(data.frame(Names,Percent,Fraction))
+    
+  }#end if statement
+  
+  #If we are looking at the frequency of smokers across two variables.
+  else{
+    a<-data.frame(table(var1,var2,smoke))
+    Levels=levels(a$var1)
+    Levels_2=levels(a$var2)
+    Percent<-c()
+    Names<-c()
+    Names_2<-c()
+    Fraction<-c()
+    
+    #Index for vectors in the loop
+    count=0
+    for(i in 1:length(Levels)){
+      for(j in 1:length(Levels_2)){
+        #increase the index. 
+        count=count+1
+        Numerator<-a$Freq[a$var1==Levels[i] & a$var2==Levels_2[j] & a$smoke==1]
+        Denominator<-a$Freq[a$var1==Levels[i]  & a$var2==Levels_2[j] & a$smoke==0]
+        #calculate a percent, not the odds ratio. #Need to update to store j variables. 
+        Denominator<-Numerator+Denominator
+        Percent[count]<-(Numerator/Denominator)*100
+        Names[count]<-Levels[i]
+        Names_2[count]<-Levels_2[j]
+        Fraction[count]<-paste(Numerator,Denominator,sep="/")
+      }
+    }
+    
+    return(data.frame(Names,Names_2,Percent,Fraction))
+    
+  }#end else statement
+}#end function
+
+
+#### Function to calculate the percentage of people giving birth in each statcan age cohort for OUR data.
+agePercent=function(min,max,sample){
+  numberin=length(sample[sample>=min & sample<=max])
+  numberout=length(sample)
+  percent=(numberin/numberout)*100
+  return(percent)
+}
+
