@@ -20,7 +20,7 @@
 
  * **[Data analysis and visualization for "Assessing the prevalence and correlates of antenatal cannabis consumption in an urban Canadian population: A cross-sectional survey"](richiehonor.github.io/Kaarid_et_al_2021_SupplementaryMaterial.html) *(Scientific Article)***
 
-*Here is the code used to perform the statistical analysis and generate the figures involved for this medical study. This was a collaboration between myself and medical researchers at McMaster University in Hamilton ontario. This article is currently in review with the journal [CMAJ Open](link.to.artical.when.available).*
+*Here is the code used to perform the statistical analysis and generate the figures involved for this medical study. This was a collaboration between myself and medical researchers at McMaster University in Hamilton ontario. This article is currently in review with the journal [CMAJ Open](http://cmajopen.ca).*
 
 
 
@@ -36,10 +36,9 @@
 ## **Python Projects**
 
 
+* **[Organising unstructured UV spectroscopy data](UV-Docs/Dat_Dec_6_2019.txt)**
 
-
-
-
+UV spectroscopy machines in laboratories are frequenly old - they can be found runing on windows XP with a sticky note attached to the monitor reading: "DO NOT UPDATE". The typical output of the machine is spectroscopy data pertaining to 96 unique samples (data points). Unfortunately, each of the 96 data points must be entered manually into the computer and the data output file is impossible to work with [(for example)](UV-Docs/UVSpec_Portfolio.html). To make matters worst, I needed to peform >50 runs, which would cost me a large amount of time. I designed two programs in python in order to build a single data frame out of the unstructured output files of the machine for data analyses.
 
 
 

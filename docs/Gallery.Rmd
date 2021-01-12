@@ -28,7 +28,7 @@ competitive ability (EICA) in which natural selection for defence reverses betwe
 </div>
 
 
-![](Gallery/ComboPlot.jpg)
+![](Gallery/ComboPlot.png)
 **Figure 3.** Proportion of women reporting cannabis consumption at some point in pregnancy (a), current consumption during pregnancy (b) and intent to consume cannabis while breastfeeding (c). Proportions are distributed across three levels of educational attainment, with and without partners who consume cannabis. For each group of women, coloured bars represent the proportion of women who reported the outcome and lines represent the 95% confidence intervals around each proportion. 
 
 
