@@ -1,0 +1,729 @@
+---
+title: "Machine Learning Portfolio"
+output: html_document
+---
+
+#### Capturing Images
+This program allowed me to operate two webcams simultaneously, and same the files with a name corresponding to the imput of a barcoder. 
+```{python,eval=F,python.reticulate=F}
+#! /usr/bin/env python
+
+#Load packages and choose directory for image storage
+import os
+import time
+import cv2
+os.chdir("/Users/richardhonor/Documents/Python/Python_pics_5")
+
+
+#cam 1 open
+cam = cv2.VideoCapture(1)
+cv2.namedWindow("Base", cv2.WINDOW_NORMAL)
+
+
+#cam 2 open
+cam2 = cv2.VideoCapture(2)
+cv2.namedWindow("ext", cv2.WINDOW_NORMAL)
+
+
+img_counter = 0
+
+while True:
+    #reading the cameras 
+    time.sleep(0.1)
+    ret, frame1 = cam.read()
+    time.sleep(0.1)
+    ret2, frame2 = cam2.read()
+    
+    #displaying the cameras
+    if ret == True:
+        cv2.imshow("Base", frame1)
+        time.sleep(0.1)
+        cv2.imshow("ext", frame2)
+        k = cv2.waitKey(2)
+
+
+    #exit code
+    if k%256 == 27:
+        # ESC pressed
+        print("Escape hit, closing...")
+        break
+        
+    #picture code
+    if k%256 == 32:
+        # SPACE pressed
+        #save base pic
+        img_name_base = "bp_Aug_9_lastc_{}.png".format(img_counter)
+        cv2.imwrite(img_name_base, frame1)
+        #save ext pic
+        img_name_ext = "ep_Aug_9_lastc_{}.png".format(img_counter)
+        cv2.imwrite(img_name_ext, frame2)
+
+        print("{} written!".format(img_name_base))
+        print("{} written!".format(img_name_ext))
+
+
+        img_counter += 1
+
+
+cv2.destroyAllWindows()
+
+cam.release()
+cam2.release()
+ 
+```
+
+
+#### Machine Learning
+After training the computer using plantcv2, this code distinguished plant from background in a photo and stored the number of pixels in the photo in a file that could be used in later analyses.
+```{python,eval=F,python.reticulate=F}
+#!/usr/bin/env python
+# coding: utf-8
+
+import os
+import argparse
+import numpy as np
+import cv2
+import sys
+from plantcv import plantcv as pcv
+
+#############
+####### Command line arguments
+############
+
+def options():
+    parser = argparse.ArgumentParser(description="Image Processing and Storage on the photopheno2000")
+    parser.add_argument("-IM","--ImageMap", help="Txt file containing the full path of the photos needed analyzed")
+    parser.add_argument("-IO","--ImageOutDirectory", help="Directory to store analyzed images; file must exist, a new one will not be created")
+    parser.add_argument("-DO","--DataOutFileName", help="Name of txt file to store the data")
+    args=parser.parse_args()
+    return(args)
+
+
+
+##########
+##Function --convert list to a string--
+##########
+
+def convert(list):
+    #convert elements in list into a float
+    s=[str(i) for i in list]
+    #join items in the list
+    p=","
+    res=p.join(s)
+    return(res)
+
+
+
+##########
+######Main program
+###########
+
+
+def main():
+
+    #get arguments from the options function 
+    args=options()
+
+    #imagemap
+    imagemap=args.ImageMap
+
+
+
+    os.chdir("/Users/richardhonor/Documents/Python") 
+
+
+
+    #############        INITIALIZE LOOP--------------------------------------------------
+
+
+    ###########
+    ##Reading file generated from MapInterpreter_JupyterInput.sh
+    ##########
+
+    #initiate loop
+    imagemap=args.ImageMap
+    #infile=open(imagemap,'r')
+    linenumber=0
+    total=0
+
+    #index to determine what photos belong to what genotype. 
+    begin=8
+
+
+
+    #########
+    #########END PREP.
+    #########
+
+
+
+    ####################
+    ##########Start processing---------------------------------------------------------
+    #####################
+
+
+    #reopen it
+    with open(imagemap,'r') as infile:
+
+        
+        
+
+        #read infile
+        for line in infile:
+            linenumber+=1
+            print("Working on photo",linenumber,"of","5624")
+            line=line.strip('\n')
+            line=line.strip('"')
+            ElementList = line.split(',')
+
+
+            #assign genotype file path
+            x = ElementList[1]
+            
+            pcv.params.debug = None
+
+            img, path, filename = pcv.readimage(x)
+
+
+            ############
+            #Create mask using baysian information
+            ###########
+            if "bp" in x:
+                masks = pcv.naive_bayes_classifier(img, pdf_file="python_pics_analysis/BayesTrain/top_view_naive_bayes_pdfs.txt")
+            else:
+                masks = pcv.naive_bayes_classifier(img, pdf_file="python_pics_analysis/BayesTrain/side_view_naive_bayes_pdfs.txt")
+
+
+            ##########
+            #cleanup
+            ##########
+            #add blur and a fill to the image
+            blur = pcv.median_blur(masks['"plant"'], 18)
+            blur_fill = pcv.fill(blur, 200)
+            
+
+            ############
+            #find objects
+            ############
+            id_objects, obj_hierarchy = pcv.find_objects(img, blur_fill)
+
+
+
+           ############
+            #Region of interest
+            ############
+
+
+            ######Define
+            ######
+            #use more conservative region of interest if from the first photosession (plants are ssmaller and background light is misinterpretted as plant here becuase the cloth on the base of the Photopheno2000 was not yet in place. )
+
+            if "Python_pics/" in x:
+
+                if "bp" in x:
+                    roi1, roi_hierarchy= pcv.roi.rectangle(img, x=550, y=350, h=500, w=330)
+                else:
+                    roi1, roi_hierarchy= pcv.roi.rectangle(img, x=400, y=600, h=290, w=450)
+
+
+            else:
+
+                #define region of interest (ROI) in image (different for ep and bp)
+                if "bp" in x:
+                    roi1, roi_hierarchy= pcv.roi.rectangle(img, x=200, y=225, h=700, w=875)
+                else:
+                    roi1, roi_hierarchy= pcv.roi.rectangle(img, x=200, y=225, h=600, w=875)
+
+
+
+            #######Type of Region of interest
+            ########
+
+            #keeping only those objects within the roi and that overlap with the roi    
+
+            #If the first session of python pics, and in EP, the photos are too sensitive so I have to be conservative
+        #and cut off anything outside of the roi... only keeping those within the ROI.
+            
+            if "Python_pics/" in x:
+
+                if "bp" in x:
+                    roi_objects, hierarchy3, kept_mask, obj_area = pcv.roi_objects(img, 'partial', roi1, roi_hierarchy, id_objects, obj_hierarchy)
+                else:
+                    roi_objects, hierarchy3, kept_mask, obj_area = pcv.roi_objects(img, 'cutto', roi1, roi_hierarchy, id_objects, obj_hierarchy)
+
+            else:
+                roi_objects, hierarchy3, kept_mask, obj_area = pcv.roi_objects(img, 'partial', roi1, roi_hierarchy, id_objects, obj_hierarchy)
+
+
+            #############
+            #combining objects: lets the computer know that the two green things are one plant 
+            ##############
+
+            obj, mask = pcv.object_composition(img, roi_objects, hierarchy3)
+
+                
+
+            ########       GENERATE MORPHOLOGY DATA----------------------------------------------
+            #this is needed to get data for the outputs.measurements and generates an image of what was analyzed
+            #send image to file. 
+            pcv.params.debug = "print"
+            pcv.params.debug_outdir = args.ImageOutDirectory
+
+
+
+            ###########---------
+            #if the plant is too small to read (in the event of an error) Zeros will be inputted as data and the photo will be skipped. 
+            ##########----------
+            try:
+                shape_images = pcv.analyze_object(img, obj, mask)
+                TooSmall=False
+
+            except:
+                #too small boolean 
+                TooSmall=True
+                
+                #the raw dat entered. 
+                rawdat=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+
+
+
+            ########       SAVING MORPHOLOGY DATA------------------------------------------------
+            
+
+            #IF TOO SMALL TO ANALYZE:
+
+            if TooSmall == True:
+
+
+                ##########
+                ##Variables needed for indexing data
+                ##########
+                #rawdat=pcv.outputs.measurements['shapes']
+                #variable_names = sorted(pcv.outputs.measurements['shapes'].keys())
+
+                
+
+                ##########
+                #Generate row data  
+                ########## 
+                #Initiating with data on photo (from MapInterpreter_JupyterInput.sh)
+                no_photo="no_photo"
+                data_list = [ElementList[0:4],no_photo]
+
+                #increase the photo index by 8. This is still needed even though no picture is printed. The photoindex still incresed. 
+                begin+=8
+                data_list.append(rawdat)
+
+                #convert the list into a string 
+                data_string=convert(data_list)
+                data_string=data_string.replace(" ","")
+                data_string=data_string.replace("[","")
+                data_string=data_string.replace("]","")
+                data_string=data_string.replace("'","")
+                data_string=data_string.replace('"',"")
+
+
+
+                ###########
+                ###Write data to file
+                ##########
+
+                filename = args.DataOutFileName
+
+                outfile = open(filename, 'a')
+
+                ######GENERATE TITLE ROW (only need to do this once)
+                if linenumber == 1:
+                    header_list = ['Genotype','Path','Timestamp','Seconds','Analyzed_Name']
+
+                    for i in range(0,len(variable_names)): 
+                        header_list.append(variable_names[i])
+                        
+                    #converting header list into a string 
+                    header_string=convert(header_list)
+
+                    #write header to outfile
+                    outfile.write(header_string+ "\n")
+
+                #write data to outfile
+                outfile.write(data_string+ "\n")
+                outfile.close()
+            
+
+        ##########IF THE IMAGE IS NOT TOO SMALL:
+            if TooSmall == False:
+
+
+                ##########
+                ##Variables needed for indexing data
+                ##########
+                rawdat=pcv.outputs.measurements['shapes']
+                variable_names = sorted(pcv.outputs.measurements['shapes'].keys())
+
+                
+
+                ##########
+                #Generate row data  
+                ########## 
+                #Initiating with data on photo (from MapInterpreter_JupyterInput.sh)
+                data_list = [ElementList[0:4],begin]
+
+                #increase the photo index by 8.
+                begin+=8
+
+                for j in range(0,len(variable_names)):
+                    #obtain the name of variable
+                    name=variable_names[j]
+                    #use the name to get the raw value, and put it into a list
+                    data_list.append(rawdat[name])
+
+                #convert the list into a string 
+                data_string=convert(data_list)
+                data_string=data_string.replace(" ","")
+                data_string=data_string.replace("[","")
+                data_string=data_string.replace("]","")
+                data_string=data_string.replace("'","")
+                data_string=data_string.replace('"',"")
+
+
+
+                ###########
+                ###Write data to file
+                ##########
+
+                filename = args.DataOutFileName
+
+                outfile = open(filename, 'a')
+
+                ######GENERATE TITLE ROW (only need to do this once)
+                if linenumber == 1:
+                    header_list = ['Genotype','Path','Timestamp','Seconds','Analyzed_Name']
+
+                    for i in range(0,len(variable_names)): 
+                        header_list.append(variable_names[i])
+                        
+                    #converting header list into a string 
+                    header_string=convert(header_list)
+
+                    #write header to outfile
+                    outfile.write(header_string+ "\n")
+
+                #write data to outfile
+                outfile.write(data_string+ "\n")
+                outfile.close()
+            
+#Call the program
+if __name__=='__main__':
+    main()
+```
+
+
+#### Error Checking
+This script allowed me to open and sort through the photos to determine if there were errors on the photos, as well as classify the error type. 
+```{python,eval=F,python.reticulate=F}
+#!/usr/bin/env python
+
+import os 
+import cv2
+import numpy as np
+import argparse
+
+def options():
+	parser=argparse.ArgumentParser(description= "Open and sorting errors that need fixing")
+	parser.add_argument("-N", "--New" , help="Runs the new version (True or False")
+	parser.add_argument("-O", "--Old", help="Runs the old version True or False")
+	parser.add_argument("-F","--fix",default="False",help="Allows for modification if true")
+	args=parser.parse_args()
+	return(args)
+
+
+
+#######
+##FUNCTIONS
+######
+
+os.chdir("/Users/richardhonor/Documents/Python/python_pics_analysis/All_Analyzed_Photos_2_copy")
+
+#string join function
+def strappend(name,list,strfirst=True):
+	master=[]
+	#putting the string before the items in the list
+	if strfirst:
+		for s in list: 
+			s= str(s)
+			out=str(name + s)
+			master.append(out)   
+
+	#putting the string after items in the list
+
+	else:
+		for s in list:
+			s=str(s) 
+			out= str(s+name)
+			master.append(out)  
+
+	return(master)
+
+infile=open("Error_group_PhotoBugs_ppup.csv","r")
+
+count=0
+for i in infile: 
+	count+=1
+infile.close()
+
+
+
+
+
+def main():
+
+	args=options()
+
+
+	#window preparation
+	cv2.namedWindow("zero", cv2.WINDOW_NORMAL)
+	cv2.resizeWindow('zero', 800,600)
+
+	#outfile 
+
+	if args.Old =="True":
+
+		pp1Error=strappend("_shapes.jpg",pp1Error,strfirst=False)
+
+		for i in ppupError:
+
+			#Cam read
+			img=cv2.imread(i)
+			cv2.imshow('zero',img)
+			k=cv2.waitKey(0)
+
+
+			#input data. 
+			if k==ord("i"):
+
+				error=input("What is the problem?")
+
+				outfile=open('Error_group_PhotoBugs.csv',"a")
+
+				outfile.write(i+","+error+"\n")
+				outfile.close()
+				print("\n\n Data written to file")
+				continue
+
+
+			if k == 27:
+				# ESC pressed
+				print("Escape hit, closing...")
+				break
+
+
+
+		cv2.destroyAllWindows()
+
+
+	if args.New=="True":
+
+		focal=strappend("_shapes.jpg",ppupError,strfirst=False)
+
+		focal_update=focal[count:]
+
+		print(focal_update[:1])
+
+
+		if args.fix=="False":
+
+			for i in focal_update:
+
+
+				#Cam read
+				img=cv2.imread(i)
+				cv2.imshow('zero',img)
+				k=cv2.waitKey(2)
+
+				#Enter error
+				error=input("What is the problem?/n:")
+
+				#Emergency end program
+				if error == "stop":
+					# ESC pressed
+					print("closing...")
+					break
+
+
+				#Data Save
+				outfile=open('Error_group_PhotoBugs_ppup.csv',"a")
+				outfile.write(i+","+error+"\n")
+				outfile.close()
+				print("\n\n Data written to file")
+				continue
+
+
+			
+
+
+			cv2.destroyAllWindows()
+
+
+
+#Call the program
+if __name__=='__main__':
+    main()
+
+```
+
+
+#### Error fixing
+This script uses the output of the previous script to rerun the analysis (which can be modified) over photos that were incorrectly identified. 
+```{python,eval=F,python.reticulate=F}
+#!/usr/bin/env python
+
+#######
+##FIXING ERRORS IN THE DATA OUTPUT AND IMAGE DIRECTORY OF ANALYZED PHOTOPHENO IMAGES
+######
+
+
+#######
+##REQUIRED PACKAGES
+######
+
+import os
+import argparse
+
+
+#######
+##ARGUMENTS FOR THE SCRIPT
+######
+
+def options():
+    parser = argparse.ArgumentParser(description="FIXING ERRORS IN THE DATA OUTPUT AND IMAGE DIRECTORY OF ANALYZED PHOTOPHENO IMAGES")
+    parser.add_argument("-EI","--EraseImages", help="This will erase Images form the specified directory (True or False)",default="False")
+    parser.add_argument("-RD","--RemoveData", help="This will remove data from the file and generate a new file with without that data (True or False)")
+    args=parser.parse_args()
+    return(args)
+
+
+
+#######
+##FUNCTIONS
+######
+
+#string join function
+def strappend(name,list,strfirst=True):
+	master=[]
+	#putting the string before the items in the list
+	if strfirst:
+		for s in list: 
+			out=str(name + s)
+			master.append(out)   
+
+	#putting the string after items in the list
+
+	else:
+		for s in list: 
+			out= str(s+name)
+			master.append(out)  
+
+	return(master)
+
+
+
+#######
+##MAIN
+######
+
+def main():
+
+	args=options()
+
+
+
+	if args.RemoveData == "True" or args.RemoveImages == "True":
+
+		#Maples that found their way into the dataset by mistake
+		ExtraMaples=["tc_9", "tc_11",  "tc_13" , "tc_17", "tc_19", "tc_69" , "tc_71" , "tc_74" ,"tc_76"  ,"tc_78" , "tc_80" , "tc_83" , "tc_85"  ,"tc_90" , "tc_95"  ,"tc_98", "tc_100", "tc_102", "tc_104", "tc_119" ,"tc_122" ,"tc_130"]
+
+		#add a "_" to ExtraMaples to remove unwanted matches
+
+		ExtraMaples=strappend("_",ExtraMaples)
+		ExtraMaples=strappend(".png",ExtraMaples,strfirst=False)
+
+		#######
+		#Create an output text file without the maple data
+		#######
+			  
+		os.chdir("/Users/richardhonor/Documents/Python/python_pics_analysis/")
+
+
+		#Garlic Mustard photos to be re-analyzed (Image paths are needed)
+		counter=0
+		infile=open("All_photo_data_Deprecated.txt","r")
+		for line in infile:
+			#skip first line
+			if counter>0:
+				
+				
+				#clean and break
+				line=line.strip('\n')
+				ElementList=line.split(",")
+				
+				#if ElementList[4]=="no_photo":
+				#	continue
+					
+				
+				#make path a string.
+				path=str(ElementList[1])
+
+				
+				
+				if args.RemoveData=="True":
+
+
+					#if there is the matching ID number in the path, print the genotype and the path and photo #
+					if any(s in path for s in ExtraMaples):
+						#dont write the line to file. 
+						pass
+
+					else: 
+						outfile=open("All_photo_data_3.txt","a")
+						outfile.write(line+"\n")
+						outfile.close()
+						#write line to file.
+
+
+				#Erase Image Option
+				if args.EraseImages=="True":
+					if any(s in path for s in ExtraMaples):
+
+						Image_number=str(ElementList[4])
+						name=str(Image_number+"_shapes.jpg")
+						path=os.path.join("/Users/richardhonor/Documents/Python/python_pics_analysis/All_Analyzed_Photos_2_copy",name)
+						os.remove(path)
+						print(name, "Removed!")
+						
+
+						#dont write the line to file. 
+					
+
+			#write header line to file (for line 0)
+			if counter == 0:
+				outfile=open("All_photo_data_3.txt","a")
+				outfile.write(line)
+				outfile.close()
+
+			#increase the line number by 1
+			counter += 1
+
+		infile.close()
+
+	else:
+		print("You did not specify what to do. Nothing was done.")
+
+	#ERASE IMAGES 
+
+
+#Call the program
+if __name__=='__main__':
+    main()
+
+
+```

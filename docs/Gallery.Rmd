@@ -10,9 +10,9 @@ output: html_document
 ![](Gallery/FamilyGrowthRate_new.png)
 **Figure 1.** Mean growth rate of Garlic Mustard (*A.petiolata*), coloured by genotype and distributed across competition treatments. 
 
-</div>
-<div style="margin-bottom:100px;">
-</div>
+
+
+
 
 ![](Gallery/Figure6bhtmlUpload.png)
 **Figure 2.** Fitness reaction norms for the relationship between enemy abundance (E) and fitness (W)
@@ -25,9 +25,9 @@ competitive ability (EICA) in which natural selection for defence reverses betwe
 
 
 
-</div>
-<div style="margin-bottom:100px;">
-</div>
+
+
+
 
 
 
@@ -41,9 +41,9 @@ with color corresponding to treatment. In the case where the effect was not sign
 slope of zero is shown to reflect the null hypothesis that the slope is equal to zero.
 
 
-</div>
-<div style="margin-bottom:100px;">
-</div>
+
+
+
 
 
 ![](Gallery/Figure5htmlUpload.png)
@@ -55,9 +55,9 @@ are high (a,d), intermediate (b,e) or low (c,f). The bottom row shows the varian
 the three scenarios, with high variance corresponding to a rapid evolutionary response to selection.
 
 
-</div>
-<div style="margin-bottom:100px;">
-</div>
+
+
+
 
 
 
@@ -65,9 +65,9 @@ the three scenarios, with high variance corresponding to a rapid evolutionary re
 **Figure 5.** Simulated data demonstrating the predicted relative fitness (W) when enemies are present (E+) and absent (E-) across a gradient of susceptible (red) and resistant (blue) genotypes. 
 
 
-</div>
-<div style="margin-bottom:100px;">
-</div>
+
+
+
 
 
 
@@ -76,9 +76,9 @@ the three scenarios, with high variance corresponding to a rapid evolutionary re
 
 
 
-</div>
-<div style="margin-bottom:100px;">
-</div>
+
+
+
 
 
 
@@ -88,9 +88,9 @@ the three scenarios, with high variance corresponding to a rapid evolutionary re
 ![](Gallery/StandardizedCompetitionEffects2.png)
 **Figure 7.** Effect of competition on *A.petiolata* and *A.saccharum* under different competition regimes. 
 
- </div>
-<div style="margin-bottom:100px;">
-</div>
+ 
+
+
 
 
 ![](Gallery/ComboPlot.png)
@@ -98,7 +98,7 @@ the three scenarios, with high variance corresponding to a rapid evolutionary re
 
 
 
-</div>
-<div style="margin-bottom:100px;">
-</div>
+
+
+
 

@@ -44,6 +44,10 @@ UV spectroscopy machines in laboratories are frequenly old - they can be found r
 
 
 
+* **[Extracting growth rate data from photos using machine learning](Machine_Learning_Portfolio.html)**
+
+How does one measure the size of each leaf on >600 plants every two weeks for 2 months? Either by spending two months in the greenhouse or by developping software to do it for you. I designed software to take photos two photos of a plant (top and side view) and assign the photos with the name corresponding to the genotype of the plant using a barcoder. I then used machine learning to train the computer to identify plant from background using the packages opencv2 and plantcv, and I extracted data pertaining to plant size. This program was run over multiple directories with >5000 images to store the data from all the photos into a single data file to be used in later analyses of growth rate. 
+
 
 
 
