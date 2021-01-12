@@ -23,13 +23,6 @@ and introduced ranges (I, yellow). Of these nine scenarios, only one supports th
 competitive ability (EICA) in which natural selection for defence reverses between ranges (panel e).
 
 
-</div>
-<div style="margin-bottom:100px;">
-</div>
-
-
-![](Gallery/ComboPlot.png)
-**Figure 3.** Proportion of women reporting cannabis consumption at some point in pregnancy (a), current consumption during pregnancy (b) and intent to consume cannabis while breastfeeding (c). Proportions are distributed across three levels of educational attainment, with and without partners who consume cannabis. For each group of women, coloured bars represent the proportion of women who reported the outcome and lines represent the 95% confidence intervals around each proportion. 
 
 
 </div>
@@ -39,7 +32,7 @@ competitive ability (EICA) in which natural selection for defence reverses betwe
 
 
 ![](Gallery/PC1SelectionMultiNoLegend_NullHyp.png)
-**Figure 4.** Association of leaf quality (PC1) with *Alliaria petiolata* rosette size and
+**Figure 3.** Association of leaf quality (PC1) with *Alliaria petiolata* rosette size and
 fecundity.Green circles denote *A. petiolata* plants grown in the alone treatment, orange squares
 denote *A. petiolata* plants grown in the interspecific treatment and blue triangles denote
 *A. petiolata* plants grown in the intraspecific treatment. The colored lines show the
@@ -54,7 +47,7 @@ slope of zero is shown to reflect the null hypothesis that the slope is equal to
 
 
 ![](Gallery/Figure5htmlUpload.png)
-**Figure 5.** A general defence trade-off model of defence traits along a gradient of enemy abundance.
+**Figure 4.** A general defence trade-off model of defence traits along a gradient of enemy abundance.
 Fitness reaction norms (top row) show the relationship between enemy abundance (E) and fitness (W)
 for five different genotypes with defence allocation ranging from low (light red) to moderate (green) to
 high (dark blue). The three columns show different scenarios in which the defence cost—benefit ratios
@@ -69,7 +62,7 @@ the three scenarios, with high variance corresponding to a rapid evolutionary re
 
 
 ![](Gallery/FitnessTradeOff_1.png)
-**Figure 6.** Simulated data demonstrating the predicted relative fitness (W) when enemies are present (E+) and absent (E-) across a gradient of susceptible (red) and resistant (blue) genotypes. 
+**Figure 5.** Simulated data demonstrating the predicted relative fitness (W) when enemies are present (E+) and absent (E-) across a gradient of susceptible (red) and resistant (blue) genotypes. 
 
 
 </div>
@@ -79,7 +72,7 @@ the three scenarios, with high variance corresponding to a rapid evolutionary re
 
 
 ![](Gallery/FitnessLine3.png)
-**Figure 7.** Linear approximations of reaction norms for fitness (W) measured in a susceptible (S, red) and a resistant genotype (R, blue). The difference in y-intercepts (WS0 – WR0) provides an estimate of the cost of resistance, while the slopes (–W0/E0) estimate of the benefits of defence.
+**Figure 6.** Linear approximations of reaction norms for fitness (W) measured in a susceptible (S, red) and a resistant genotype (R, blue). The difference in y-intercepts (WS0 – WR0) provides an estimate of the cost of resistance, while the slopes (–W0/E0) estimate of the benefits of defence.
 
 
 
@@ -93,8 +86,19 @@ the three scenarios, with high variance corresponding to a rapid evolutionary re
 
 
 ![](Gallery/StandardizedCompetitionEffects2.png)
-**Figure 8.** Effect of competition on *A.petiolata* and *A.saccharum* under different competition regimes. 
+**Figure 7.** Effect of competition on *A.petiolata* and *A.saccharum* under different competition regimes. 
 
  </div>
 <div style="margin-bottom:100px;">
 </div>
+
+
+![](Gallery/ComboPlot.png)
+**Figure 8.** Proportion of women reporting cannabis consumption at some point in pregnancy (a), current consumption during pregnancy (b) and intent to consume cannabis while breastfeeding (c). Proportions are distributed across three levels of educational attainment, with and without partners who consume cannabis. For each group of women, coloured bars represent the proportion of women who reported the outcome and lines represent the 95% confidence intervals around each proportion. 
+
+
+
+</div>
+<div style="margin-bottom:100px;">
+</div>
+
