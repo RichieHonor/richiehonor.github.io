@@ -3,9 +3,9 @@
 
 #### Here you can view the figures I have created, my data analyses and other examples of code that contributed to various projects. The links to my published works are also included as links when available. 
 
-## **[Gallery](richiehonor.github.io/Gallery.md)**
+## **[Gallery](richiehonor.github.io/Gallery.html)**
 
-![Image](Figure6bhtmlUpload.png)
+
 
 ## **R Projects**
 
@@ -28,4 +28,34 @@
  * **[Data integration for "Plasticity and evolutionary potential of *Alliaria petiolata* life history and leaf chemistry traits in different competitive environments"](richiehonor.github.io/AllData_Synthesis.html) *(MSc thesis)***
 
 *Here is the code used to integrate 11 different data files into one file from which data analysis and visualization were performed (see below). This data was used in the publishing of my [master's thesis](https://qspace.library.queensu.ca/handle/1974/28610).*
+
+
+
+
+
+## **Python Projects**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
