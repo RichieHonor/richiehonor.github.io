@@ -10,9 +10,10 @@ output: html_document
 ![](Gallery/FamilyGrowthRate_new.png)
 **Figure 1.** Mean growth rate of Garlic Mustard (*A.petiolata*), coloured by genotype and distributed across competition treatments. 
 
-
-
-
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
 ![](Gallery/Figure6bhtmlUpload.png)
 **Figure 2.** Fitness reaction norms for the relationship between enemy abundance (E) and fitness (W)
@@ -22,10 +23,11 @@ three rows show different scenarios for variation in the abundance of enemies in
 and introduced ranges (I, yellow). Of these nine scenarios, only one supports the evolution of increased
 competitive ability (EICA) in which natural selection for defence reverses between ranges (panel e).
 
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
-
-
-
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
 
 
@@ -40,10 +42,11 @@ estimated effect of leaf quality on rosette size and fecundity (i.e., selection 
 with color corresponding to treatment. In the case where the effect was not significant, a
 slope of zero is shown to reflect the null hypothesis that the slope is equal to zero.
 
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
-
-
-
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
 
 ![](Gallery/Figure5htmlUpload.png)
@@ -55,19 +58,21 @@ are high (a,d), intermediate (b,e) or low (c,f). The bottom row shows the varian
 the three scenarios, with high variance corresponding to a rapid evolutionary response to selection.
 
 
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
-
-
-
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
 
 ![](Gallery/FitnessTradeOff_1.png)
 **Figure 5.** Simulated data demonstrating the predicted relative fitness (W) when enemies are present (E+) and absent (E-) across a gradient of susceptible (red) and resistant (blue) genotypes. 
 
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
-
-
-
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
 
 
@@ -77,10 +82,11 @@ the three scenarios, with high variance corresponding to a rapid evolutionary re
 
 
 
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
-
-
-
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
 
 
@@ -88,17 +94,22 @@ the three scenarios, with high variance corresponding to a rapid evolutionary re
 ![](Gallery/StandardizedCompetitionEffects2.png)
 **Figure 7.** Effect of competition on *A.petiolata* and *A.saccharum* under different competition regimes. 
 
- 
-
-
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
 
 ![](Gallery/ComboPlot.png)
 **Figure 8.** Proportion of women reporting cannabis consumption at some point in pregnancy (a), current consumption during pregnancy (b) and intent to consume cannabis while breastfeeding (c). Proportions are distributed across three levels of educational attainment, with and without partners who consume cannabis. For each group of women, coloured bars represent the proportion of women who reported the outcome and lines represent the 95% confidence intervals around each proportion. 
 
 
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
 
-
-
+![](Gallery/ML_Image.png)
+**Figure 9.** Example of machine learning. After training, the computer uses an algorithm to identify the plant in the input images (top). This yields the output images (bottom) and data pertaining to the number of pixels identified as plant in the photo.
 

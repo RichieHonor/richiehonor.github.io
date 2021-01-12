@@ -18,7 +18,7 @@
 
 
 
- * **[Data analysis and visualization for "Assessing the prevalence and correlates of antenatal cannabis consumption in an urban Canadian population: A cross-sectional survey"](richiehonor.github.io/Kaarid_et_al_2021_SupplementaryMaterial.html) *(Scientific Article)***
+ * **[Data analysis and visualization for "Assessing the prevalence and correlates of antenatal cannabis consumption in an urban Canadian population: A cross-sectional survey"](richiehonor.github.io/Kaarid_et_al_2021_SupplementaryMaterial.html) *(acientific article)***
 
 *Here is the code used to perform the statistical analysis and generate the figures involved for this medical study. This was a collaboration between myself and medical researchers at McMaster University in Hamilton ontario. This article is currently in review with the journal [CMAJ Open](http://cmajopen.ca).*
 
