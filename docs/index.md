@@ -11,7 +11,7 @@
 
 
 
-* **[Figure Generation for "EICA 2.0: A general theory of enemy release in plant invasions"](richiehonor.github.io/EICA2_SuppMat.html) *(published book chapter)*** 
+* **[Figure generation for "EICA 2.0: A general theory of enemy release in plant invasions"](richiehonor.github.io/EICA2_SuppMat.html) *(published book chapter)*** 
 
 *Here is the code used to generate the figures for my recently published (2020) chapter in the book ["Plant invasions: the role of biotic interactions"](https://www.cabi.org/cabebooks/ebook/20203555905). There also contains a few figures that were not used in the final manuscript, but were part of the process.*
 
@@ -36,9 +36,9 @@
 ## **Python Projects**
 
 
-* **[Organising unstructured UV spectroscopy data](UV-Docs/Dat_Dec_6_2019.txt)**
+* **[Organising unstructured UV spectroscopy data](UV-Docs/UVSpec_Portfolio.html)**
 
-UV spectroscopy machines in laboratories are frequenly old - they can be found runing on windows XP with a sticky note attached to the monitor reading: "DO NOT UPDATE". The typical output of the machine is spectroscopy data pertaining to 96 unique samples (data points). Unfortunately, each of the 96 data points must be entered manually into the computer and the data output file is impossible to work with [(for example)](UV-Docs/UVSpec_Portfolio.html). To make matters worst, I needed to peform >50 runs, which would cost me a large amount of time. I designed two programs in python in order to build a single data frame out of the unstructured output files of the machine for data analyses.
+UV spectroscopy machines in laboratories are frequenly old - they can be found runing on windows XP with a sticky note attached to the monitor reading: "DO NOT UPDATE". The typical output of the machine is spectroscopy data from various wavelength corresponding to 96 unique samples, yield hundreds of data points that must be organised [(for example)](UV-Docs/Dat_Dec_6_2019.txt). While this is typically done manually, I needed to peform >50 runs, which would have costed me a large amount of time. I designed two programs in python in order to build a [single data frame](UV-Docs/All_UV_Data.txt) out of the unstructured output files of the machine for later analysis in R.
 
 
 
