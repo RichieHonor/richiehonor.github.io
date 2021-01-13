@@ -4,7 +4,7 @@ output: html_document
 ---
 
 #### Capturing Images
-This program allowed me to operate two webcams simultaneously, and same the files with a name corresponding to the imput of a barcoder. 
+This program allowed me to operate two webcams simultaneously, store the photos taken with the webcams with the appropriate plant ID, which was received as input from a barcode machine. This program was used to collect the images to be analyzed with machine learning.
 ```{python,eval=F,python.reticulate=F}
 #! /usr/bin/env python
 
@@ -74,7 +74,7 @@ cam2.release()
 
 
 #### Machine Learning
-After training the computer using plantcv2, this code distinguished plant from background in a photo and stored the number of pixels in the photo in a file that could be used in later analyses.
+This code utilizes machine learning to distinguished plant from background in a photo. It then extracts information surrounding the plant and stores this data in an output file.
 ```{python,eval=F,python.reticulate=F}
 #!/usr/bin/env python
 # coding: utf-8
@@ -419,7 +419,7 @@ if __name__=='__main__':
 
 
 #### Error Checking
-This script allowed me to open and sort through the photos to determine if there were errors on the photos, as well as classify the error type. 
+This script allowed me to open and sort through the photos to determine if there were errors in the identification of the plant. It also allowed me to tag the photos with an error class indicating whether the image needed to be removed, or what type of fix was needed.
 ```{python,eval=F,python.reticulate=F}
 #!/usr/bin/env python
 
@@ -573,7 +573,7 @@ if __name__=='__main__':
 
 
 #### Error fixing
-This script uses the output of the previous script to rerun the analysis (which can be modified) over photos that were incorrectly identified. 
+This script uses the output of the previous script to remove erroneous images and data from the output files.
 ```{python,eval=F,python.reticulate=F}
 #!/usr/bin/env python
 

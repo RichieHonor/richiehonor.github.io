@@ -4,7 +4,7 @@ output: html_document
 ---
 
 #### Organizing unstructured data
-This program utilizes the unstructured data file output from the UV spectroscopy machine, along with a custom map file made in excel, to build a data frame in a csv file to be used in data analyses. 
+This program transforms an unstructured data file from the UV spectroscopy machine, into an organized csv file to be used in data analyses. This program also skips the tedious task of entering each sample ID into the UV-spectroscopy machine by accepting a custom excel file indicating the samples in the run.
 ```{python,eval=F,python.reticulate=F}
 #!/Users/richardhonor/anaconda3/bin/python
 	
@@ -266,3 +266,4 @@ for i in Analyze:
 
 
 ```
+
