@@ -3,7 +3,15 @@ title: "Gallery"
 output: html_document
 ---
 
-#### Here you can view examples of the images I have created in R
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+#### Here you can view some of the images I created in R.
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
 ![](Gallery/ERHTest_Apr8.png)
 **Figure 1.** Prediction of enemy release as an important driver of species invasions, where invasiveness is predicted by a significant interaction between enemy release and top-down control. Each point represents an introduced species. The yellow line indicates the effect of enemy release given the maximum amount of top-down control observed, the black line indicates the effect of enemy release given no top-down control. Invasiveness and enemy release are treated as continuous variables with P representing population density, and E representing enemy abundance. Subscripts denote whether the trait was measured in the invasive (I) or native (N) range. Superscripts in the “top-down control” legend indicate density with enemies (+) and without enemies (–). 
