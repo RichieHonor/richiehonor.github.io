@@ -5,6 +5,10 @@
 
 ![Image](Gallery/Figure5bhtmlUpload.png)
 
+![Image](Gallery/ERHTest_Apr8.tiff)
+
+![Image](Gallery/PathFigure_Perf.tiff)
+
 ![Image](Gallery/FitnessTradeOff_1.png)
 
 ![Image](Gallery/FitnessLine3.png)

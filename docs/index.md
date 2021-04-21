@@ -16,7 +16,7 @@
 
 
 ## **Gallery**
-[Click here for examples of the figures I have created](richiehonor.github.io/Gallery.html)
+[Click here for examples of the figures I have created](Gallery.html)
 
 
 
@@ -45,21 +45,21 @@ How does one measure the size of each leaf on >600 plants every two weeks for 2 
 
 
 
-* **[Figure generation for *"EICA 2.0: A general theory of enemy release in plant invasions"*](richiehonor.github.io/EICA2_SuppMat.html)** (published book chapter)
+* **[Figure generation for *"EICA 2.0: A general theory of enemy release in plant invasions"*](EICA2_SuppMat.html)** (published book chapter)
 
 Here is the code used to generate the figures for my recently published (2020) chapter in the book ["Plant invasions: the role of biotic interactions"](https://www.cabi.org/cabebooks/ebook/20203555905). 
 
 
 
 
- * **[Data analysis and visualization for *"Assessing the prevalence and correlates of antenatal cannabis consumption in an urban Canadian population: A cross-sectional survey"*](richiehonor.github.io/Kaarid_et_al_2021_SupplementaryMaterial.html)** (scientific article)
+ * **[Data analysis and visualization for *"Assessing the prevalence and correlates of antenatal cannabis consumption in an urban Canadian population: A cross-sectional survey"*](Kaarid_et_al_2021_SupplementaryMaterial.html)** (scientific article)
 
 Here is the code used to perform statistical analyses and generate figures for this medical study. This was a collaboration between myself and medical staff at McMaster University in Hamilton, Ontario. This article is currently in review with the journal [CMAJ Open](http://cmajopen.ca).
 
 
 
 
- * **[Data integration for *"Plasticity and evolutionary potential of Alliaria petiolata life history and leaf chemistry traits in different competitive environments"*](richiehonor.github.io/AllData_Synthesis.html)** (MSc thesis)
+ * **[Data integration for *"Plasticity and evolutionary potential of Alliaria petiolata life history and leaf chemistry traits in different competitive environments"*](AllData_Synthesis.html)** (MSc thesis)
 
 Here is the code used to integrate 11 different data files into one file from which data analysis and visualization were performed. These data were used in the publishing of my [master's thesis](https://qspace.library.queensu.ca/handle/1974/28610).
 
