@@ -54,7 +54,7 @@ Here is the code used to generate the figures for my recently published (2020) c
 
  * **[Data analysis and visualization for *"Assessing the prevalence and correlates of antenatal cannabis consumption in an urban Canadian population: A cross-sectional survey"*](Kaarid_et_al_2021_SupplementaryMaterial.html)** (scientific article)
 
-Here is the code used to perform statistical analyses and generate figures for this medical study. This was a collaboration between myself and medical staff at McMaster University in Hamilton, Ontario. This article has been accepted for publication with the journal [CMAJ Open](http://cmajopen.ca).
+Here is the code used to perform statistical analyses and generate figures for this medical study. This was a collaboration between myself and medical staff at McMaster University in Hamilton, Ontario. This article has been published with the journal [CMAJ Open](https://www.cmajopen.ca/content/9/2/E703).
 
 
 
